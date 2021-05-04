@@ -66,10 +66,8 @@ namespace strukdat
    */
     void add_edge(const VertexType &val1, const VertexType val2)
     {
-      list_type adj1 = _adj_list[val1];
-      list_type adj2 = _adj_list[val2];
-      adj1.insert(val2);
-      adj2.insert(val1);
+      _adj_list[val1].insert(val2);
+      _adj_list[val2].insert(val1);
     }
 
     /**
@@ -168,8 +166,10 @@ namespace strukdat
       s.push(node);
       while (!s.empty())
       {
+        node = s.top();
         if (!m[node])
         {
+          m[node] = true;
           func(node);
         }
         auto i = _adj_list.at(node).begin();
